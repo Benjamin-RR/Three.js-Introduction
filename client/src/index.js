@@ -25,6 +25,22 @@ camera.position.setZ(30);
 // with the render parameters set, lets render things using our scene, and camera.
 renderer.render( scene, camera );
 
+// this function will help move our camera as we scroll, as well as move other 3D objects dynamically.
+function moveCamera() {
+    const t = document.body.getBoundingClientRect().top;
+    earth.rotation.x += 0.05;
+    earth.rotation.y += 0.075;
+    earth.rotation.z += 0.05;
+
+    cube.rotation.y += 0.01;
+    cube.rotation.x += 0.01;
+
+    camera.position.z = t * -0.01;
+    camera.position.x = t * -0.0002;
+    camera.position.y = t * -0.0002;
+}
+document.body.onscroll = moveCamera
+
 // OBJECTS:
 // this is a geometry shape that THREE.js has as default (we can also use outsourced 3d objects if we want for example from Blender)
 // geometry is our shape, while material is the skin to that shape. torus is the shape and skin together as a single object.
@@ -49,6 +65,29 @@ function addStar() {
 }
 // 200 Arrays that I will fill, and for each I will call the addStar, which fills x,y,z with random numbers between -100 to 100.
 Array(200).fill().forEach(addStar);
+
+// we can also add texture mapping onto objects, lets try a simple one on a cube.
+const cubeTexture = new THREE.TextureLoader().load('squareTexture.jfif');
+const cube = new THREE.Mesh(
+    new THREE.BoxGeometry(3,3,3),
+    new THREE.MeshBasicMaterial( {map: cubeTexture } )
+);
+scene.add(cube);
+
+// notice in this example we also have 'normalMap' which allows light to bounce off of density mapTextures which gives an illusion of depth on texture maps.
+const earthSurface = new THREE.TextureLoader().load('earth.jpg');
+const earthDepth = new THREE.TextureLoader().load('earthElevation.jpg');
+const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(3, 32, 32),
+    new THREE.MeshStandardMaterial( {
+        map: earthSurface,
+        normalMap: earthDepth
+    } )
+);
+scene.add(earth);
+// you can reposition any object by simply redefining their position like so (using either = or set, they do the same thing):
+earth.position.z = 30;
+earth.position.setX( -10);
 
 // LIGHTING:
 // Point light for lighting a focused area.
