@@ -1,7 +1,10 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { Shape } from 'three';
+
+// this loader will help load 3d models made outside of VS code in the format of gltf.
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+const gltfLoader = new GLTFLoader();
 
 // SCENE SET UP:
 // the scene in which everything will be rendered to.
@@ -51,6 +54,16 @@ const torus = new THREE.Mesh( geometry, material );
 
 // lets attatch the torus object to our scene.
 scene.add(torus);
+
+// lets try loading an object made in blender.
+// to get your object from blender, you need to export it as a gltf (alternatively, convert it to a gltf file type),
+// then simply put your file in your public dir.
+const figure = gltfLoader.load('myBlenderObject.gltf', (person) => {
+    person.scene.scale.set(0.02,0.02,0.02);
+    person.scene.rotation.set(0,5,0);
+    scene.add(person.scene);
+    person.scene.position.x = 70;
+})
 
 // function to help generate many stars for my scene.
 function addStar() {

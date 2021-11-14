@@ -5,3 +5,7 @@ This repository is simply my first experimentations of Three.js to help introduc
 
 ### What is Three.js?
 Three.js is a cross-browser JavaScript library and application programming interface used to create and display animated 3D computer graphics in a web browser using WebGL. The source code is hosted in a repository on GitHub.
+
+### Try it yourself
+
+Pull up terminal from VSCode and go to dir cd client, then run script: 'yarn start'
