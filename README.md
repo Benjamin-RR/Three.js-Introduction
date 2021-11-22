@@ -9,3 +9,9 @@ Three.js is a cross-browser JavaScript library and application programming inter
 ### Try it yourself
 
 Pull up terminal from VSCode and go to dir cd client, then run script: 'yarn start'
+
+### Why Three.js?
+
+You can build websites with 3d objects very easily using Three.js combine with other packages such as "react-three-fiber" which is a React component that renders three.js objects in your SPA on React. (If you would like to try this simply install it: npm install three @react-three/fiber)
+
+Additionally if can use your own made 3d objects made and designed in Blender, saving it as a gltf file. Or used pre-existing 3d objects. Many resources exist for this, for example https://poly.pizza/.
